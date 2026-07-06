@@ -1,0 +1,5 @@
+@use "./sass/variables/colors.scss" as c;
+
+.main {
+  background-color: c.$bg;
+}
