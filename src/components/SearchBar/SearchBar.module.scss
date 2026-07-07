@@ -1,0 +1,35 @@
+@use "../../sass/variables/colors.scss" as c;
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 25px;
+  border: 2px solid rgba(26, 26, 46, 0.1);
+  padding: 5px;
+  &:focus-within {
+    border-color: c.$primary;
+  }
+}
+.searchIcon {
+  font-size: 1em;
+  padding: 7px;
+}
+.input {
+  border: none;
+  background: transparent;
+  flex-grow: 1;
+  padding: 8px 0px;
+  &:focus {
+    outline: none;
+  }
+}
+.btn {
+  color: white;
+  background-color: c.$primary;
+  font-size: 1em;
+  border-radius: 20px;
+  border-color: rgba(26, 26, 46, 0.1);
+  padding: 6px 16px;
+}
