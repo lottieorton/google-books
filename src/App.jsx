@@ -16,7 +16,6 @@ function App() {
       <Header />
       <SearchBar onSearch={onSearch} />
       <BooksContainer searchTerm={searchTerm} />
-      <BookList />
     </main>
   );
 }
