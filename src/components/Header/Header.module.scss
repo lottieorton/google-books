@@ -1,5 +1,6 @@
 @use "../../sass/variables/fonts.scss" as f;
 @use "../../sass/variables/colors.scss" as c;
+@use "../../sass/mixins/mixins" as *;
 
 .container {
   display: flex;
@@ -10,7 +11,9 @@
 }
 
 .heading {
+  @include large-heading;
   font-size: 3em;
+  font-weight: 900;
 }
 
 .text {

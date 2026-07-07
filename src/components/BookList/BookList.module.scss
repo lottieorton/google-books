@@ -1,0 +1,22 @@
+@use "../../sass/mixins/mixins" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2em;
+  gap: 2em;
+}
+
+.searchResultsHeader {
+  @include large-heading;
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+  width: 100%;
+  grid-gap: 1.5em;
+  justify-content: center;
+}
