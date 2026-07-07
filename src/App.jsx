@@ -1,13 +1,17 @@
 import "./App.scss";
 import Header from "./components/Header/Header";
-import { getBooksBySearchTerm } from "./services/books-service";
+import SearchBar from "./components/SearchBar/SearchBar";
+import BookList from "./components/BookList/BookList";
+// import { getBooksBySearchTerm } from "./services/books-service";
 
 function App() {
-  getBooksBySearchTerm("flowers").then((data) => console.log(data.items));
+  //getBooksBySearchTerm("flowers").then((data) => console.log(data.items));
 
   return (
-    <main>
+    <main className="main">
       <Header />
+      <SearchBar />
+      <BookList />
     </main>
   );
 }

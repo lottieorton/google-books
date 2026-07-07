@@ -1,0 +1,8 @@
+@use "../variables/fonts.scss" as f;
+@use "../variables/colors.scss" as c;
+
+@mixin large-heading {
+  font-family: f.$header;
+  color: c.$header-text;
+  margin: 0;
+}

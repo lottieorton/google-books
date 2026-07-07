@@ -1,0 +1,34 @@
+@use "../../sass/mixins/mixins" as *;
+@use "../../sass/mixins/media-queries" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2em;
+  gap: 2em;
+  @include large-desktop {
+    padding: 3em;
+  }
+}
+
+.searchResultsHeader {
+  @include large-heading;
+  font-weight: bold;
+  font-size: 1.5em;
+  @include large-desktop {
+    font-size: 2.25em;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+  width: 100%;
+  grid-gap: 1.5em;
+  justify-content: center;
+  @include large-desktop {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 400px));
+    grid-gap: 2em;
+  }
+}

@@ -1,0 +1,67 @@
+@use "../../sass/variables/colors.scss" as c;
+@use "../../sass/mixins/media-queries" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  @include large-desktop {
+    width: 400px;
+  }
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid rgba(26, 26, 46, 0.1);
+  padding: 1em;
+  gap: 0.5em;
+  @include large-desktop {
+    padding: 1.5em;
+    gap: 0.75em;
+  }
+}
+.img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+.category {
+  margin: 0;
+  color: c.$primary;
+  background-color: #fff0e0;
+  font-weight: bold;
+  font-size: 0.8em;
+  padding: 4px 6px;
+  border-radius: 10px;
+  @include large-desktop {
+    font-size: 1.1em;
+    padding: 6px 10px;
+    border-radius: 15px;
+  }
+}
+.title {
+  color: c.$header-text;
+  font-size: 1.1em;
+  margin: 0;
+  @include large-desktop {
+    font-size: 1.6em;
+  }
+}
+.author {
+  font-size: 1em;
+  margin: 0;
+  @include large-desktop {
+    font-size: 1.3em;
+  }
+}
+.description {
+  font-size: 0.85em;
+  margin: 0;
+  @include large-desktop {
+    font-size: 1.1em;
+  }
+}
