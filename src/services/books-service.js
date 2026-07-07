@@ -9,8 +9,10 @@ export const getBooksBySearchTerm = async (term) => {
       throw new Error("Failed to fetch books");
     }
     const data = await response.json();
-
-    return data;
+    if (data.items.length === 0) {
+      throw new Error("No books found for the search term " + term);
+    }
+    return data.items;
   } catch (err) {
     console.error(err.message);
   }
