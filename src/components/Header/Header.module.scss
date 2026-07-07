@@ -1,21 +1,33 @@
 @use "../../sass/variables/fonts.scss" as f;
 @use "../../sass/variables/colors.scss" as c;
 @use "../../sass/mixins/mixins" as *;
+@use "../../sass/mixins/media-queries" as *;
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3em 1em;
+  padding: 2em 1em;
   gap: 1em;
+  @include large-desktop {
+    padding: 3em 1em;
+    gap: 1.5em;
+  }
 }
 
 .heading {
   @include large-heading;
   font-size: 3em;
   font-weight: 900;
+  @include large-desktop {
+    font-size: 4em;
+  }
 }
 
 .text {
   margin: 0;
+  font-size: 1em;
+  @include large-desktop {
+    font-size: 1.5em;
+  }
 }

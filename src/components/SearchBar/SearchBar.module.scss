@@ -1,4 +1,5 @@
 @use "../../sass/variables/colors.scss" as c;
+@use "../../sass/mixins/media-queries" as *;
 
 .form {
   display: flex;
@@ -13,10 +14,19 @@
   &:focus-within {
     border-color: c.$primary;
   }
+  @include large-desktop {
+    border-radius: 35px;
+    padding: 7px 10px;
+    width: 1200px;
+  }
 }
 .icon {
   font-size: 1em;
   padding: 7px;
+  @include large-desktop {
+    font-size: 1.3em;
+    padding: 7px 15px;
+  }
 }
 .input {
   border: none;
@@ -25,6 +35,10 @@
   padding: 8px 0px;
   &:focus {
     outline: none;
+  }
+  @include large-desktop {
+    font-size: 1.4em;
+    padding: 5px 0px;
   }
 }
 .btn {
@@ -35,4 +49,9 @@
   border-radius: 20px;
   border-color: rgba(26, 26, 46, 0.1);
   padding: 6px 16px;
+  @include large-desktop {
+    font-size: 1.4em;
+    border-radius: 30px;
+    padding: 6px 15px;
+  }
 }
