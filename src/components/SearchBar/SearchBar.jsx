@@ -14,6 +14,8 @@ export default function SearchBar({ onSearch }) {
     setInput("");
   };
 
+  const isInputEmpty = input === "";
+
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
       <i className={classes.icon + " fa-solid fa-magnifying-glass"}></i>
@@ -24,7 +26,9 @@ export default function SearchBar({ onSearch }) {
         value={input}
         onChange={handleChange}
       />
-      <button className={classes.btn}>Go</button>
+      <button className={classes.btn} disabled={isInputEmpty}>
+        Go
+      </button>
     </form>
   );
 }
