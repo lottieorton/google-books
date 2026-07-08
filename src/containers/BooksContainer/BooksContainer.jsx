@@ -9,7 +9,7 @@ export default function BooksContainer({ searchTerm }) {
   useEffect(() => {
     if (searchTerm === null) return;
 
-    setStatus("searching");
+    setStatus("loading");
     getBooksBySearchTerm(searchTerm)
       .then((data) => {
         setStatus("success");
