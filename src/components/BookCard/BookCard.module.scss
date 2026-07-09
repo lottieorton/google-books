@@ -62,6 +62,8 @@ $loadingColor: #f0ebe3;
 .imgContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 260px;
   padding: 1em;
   &_bgColor {
     &_0 {
@@ -86,6 +88,11 @@ $loadingColor: #f0ebe3;
   width: auto;
   object-fit: contain;
 }
+.noImgIcon {
+  color: white;
+  font-size: 6em;
+}
+
 .category {
   margin: 0;
   color: c.$primary;

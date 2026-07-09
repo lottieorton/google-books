@@ -8,6 +8,7 @@ export default function BookCard({ book, index }) {
     description,
     imageLinks: { thumbnail: image },
   } = book;
+  console.log(title, authors, categories, description, image);
 
   const bgColorNum = index % 4;
 
@@ -20,10 +21,16 @@ export default function BookCard({ book, index }) {
           classes[`imgContainer_bgColor_${bgColorNum}`]
         }
       >
-        <img className={classes.img} src={image} alt="Book Cover" />
+        {image ? (
+          <img className={classes.img} src={image} alt="Book Cover" />
+        ) : (
+          <span className={classes.noImgIcon + " material-symbols-outlined"}>
+            import_contacts
+          </span>
+        )}
       </div>
       <div className={classes.details}>
-        <p className={classes.category}>{categories}</p>
+        <p className={classes.category}>{categories?.join(", ")}</p>
         <h4 className={classes.title}>{title}</h4>
         <p className={classes.author}>{authors?.join(", ")}</p>
         <p className={classes.description}>{description}</p>
