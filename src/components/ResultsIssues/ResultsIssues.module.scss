@@ -13,7 +13,7 @@ $error-pink: #ffeaea;
   border-radius: 15px;
   margin-top: 3em;
   &_noBook {
-    border: 2px solid rgba(26, 26, 46, 0.1);
+    border: 2px solid c.$border-coloring;
   }
   &_error {
     border: 2px solid $error-pink;

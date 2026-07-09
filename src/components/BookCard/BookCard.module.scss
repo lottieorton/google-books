@@ -1,6 +1,19 @@
 @use "../../sass/variables/colors.scss" as c;
 @use "../../sass/mixins/media-queries" as *;
 
+$loadingColor: #f0ebe3;
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -8,7 +21,11 @@
   width: 300px;
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(26, 26, 46, 0.1);
+  border: 1px solid c.$border-coloring;
+
+  &_loading {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
 
   @include large-desktop {
     width: 400px;
@@ -58,6 +75,9 @@
     }
     &_3 {
       background-color: c.$tertiary;
+    }
+    &_loading {
+      background-color: $loadingColor;
     }
   }
 }
@@ -120,5 +140,22 @@
     bottom: 1.5em;
     left: 1.5em;
     font-size: 1.1em;
+  }
+}
+.loadingText {
+  background-color: $loadingColor;
+  border-radius: 10px;
+  margin: 0.25em;
+  &_small {
+    width: 150px;
+    padding: 8px;
+  }
+  &_large {
+    width: 200px;
+    padding: 10px;
+  }
+  @include large-desktop {
+    padding: 6px 10px;
+    border-radius: 15px;
   }
 }

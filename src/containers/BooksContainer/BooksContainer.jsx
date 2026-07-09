@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getBooksBySearchTerm } from "../../services/books-service";
 import BookList from "../../components/BookList/BookList";
+import BookListShell from "../../components/BookList/BookListShell";
 import NoBooksView from "../../components/ResultsIssues/NoBooksView";
 import FetchErrorView from "../../components/ResultsIssues/FetchErrorView";
 
@@ -25,7 +26,7 @@ export default function BooksContainer({ searchTerm }) {
 
   if (status === "pending") return;
 
-  if (status === "loading") return <p>Loading...</p>;
+  if (status === "loading") return <BookListShell />;
 
   if (status === "error") return <FetchErrorView />;
 

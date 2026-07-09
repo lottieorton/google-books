@@ -7,7 +7,7 @@
   align-items: center;
   background-color: white;
   border-radius: 25px;
-  border: 2px solid rgba(26, 26, 46, 0.1);
+  border: 2px solid c.$border-coloring;
   padding: 5px;
   width: 700px;
   max-width: 80%;
@@ -47,7 +47,7 @@
   font-size: 1em;
   font-weight: bold;
   border-radius: 20px;
-  border-color: rgba(26, 26, 46, 0.1);
+  border-color: c.$border-coloring;
   padding: 6px 16px;
   &:disabled {
     opacity: 0.4;
