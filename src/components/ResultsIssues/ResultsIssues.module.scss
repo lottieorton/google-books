@@ -1,0 +1,50 @@
+@use "./../../sass/variables/colors.scss" as c;
+@use "./../../sass/mixins/mixins" as *;
+$error-pink: #ffeaea;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5em 3em;
+  width: 100%;
+  gap: 1em;
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 3em;
+  &_noBook {
+    border: 2px solid rgba(26, 26, 46, 0.1);
+  }
+  &_error {
+    border: 2px solid $error-pink;
+  }
+}
+
+.icon {
+  font-size: 1.5em;
+  padding: 0.75em;
+  border-radius: 15px;
+
+  &_noBook {
+    color: c.$header-text;
+    background-color: c.$accent;
+  }
+  &_error {
+    color: c.$primary;
+    background-color: $error-pink;
+  }
+}
+
+.header {
+  @include large-heading;
+  font-size: 1.5em;
+  text-align: center;
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+.text {
+  text-align: center;
+  max-width: 425px;
+  margin: 0;
+}

@@ -8,9 +8,12 @@ export default function BookList({ books, searchTerm }) {
 
   return (
     <section className={classes.container}>
-      <h2 className={classes.searchResultsHeader}>
-        Results for "{searchTerm}"
-      </h2>
+      <div className={classes.searchResultsInfo}>
+        <h2 className={classes.searchResultsHeader}>
+          Results for "{searchTerm}"
+        </h2>
+        <p className={classes.searchResultsText}>{books.length} books found</p>
+      </div>
       <div className={classes.grid}>{listBooks}</div>
     </section>
   );
