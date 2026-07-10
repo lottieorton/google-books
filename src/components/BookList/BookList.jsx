@@ -1,7 +1,7 @@
 import classes from "./BookList.module.scss";
 import BookCard from "../BookCard/BookCard";
 
-export default function BookList({ books, searchTerm }) {
+export default function BookList({ books, searchTerm, totalNumBooks }) {
   const listBooks = books.map((book, index) => {
     return <BookCard key={book.id} book={book.volumeInfo} index={index} />;
   });
@@ -12,7 +12,7 @@ export default function BookList({ books, searchTerm }) {
         <h2 className={classes.searchResultsHeader}>
           Results for "{searchTerm}"
         </h2>
-        <p className={classes.searchResultsText}>{books.length} books found</p>
+        <p className={classes.searchResultsText}>{totalNumBooks} books found</p>
       </div>
       <div className={classes.grid}>{listBooks}</div>
     </section>
