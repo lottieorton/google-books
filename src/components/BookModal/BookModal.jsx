@@ -51,35 +51,52 @@ export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
         </section>
         <div className={classes.content}>
           <div className={classes.grid}>
-            <div
-              className={classes.infoSegment + " " + classes.infoSegment_rating}
-            >
-              <p className={classes.infoText}>{averageRating} / 5</p>
-              <p className={classes.infoTitle}>from {ratingsCount} ratings</p>
-            </div>
+            {averageRating && (
+              <div
+                className={
+                  classes.infoSegment + " " + classes.infoSegment_rating
+                }
+              >
+                <div className={classes.infoSegment_oneLine}>
+                  <p className={classes.infoText}> ⭐️ {averageRating} / 5</p>
+                  <p className={classes.infoTitle}>
+                    from {ratingsCount}{" "}
+                    {ratingsCount === 1 ? "rating" : "ratings"}
+                  </p>
+                </div>
+              </div>
+            )}
             <div className={classes.infoSegment}>
               <p className={classes.infoTitle}>PAGES</p>
-              <p className={classes.infoText}>{pageCount}</p>
+              <p className={classes.infoText}>{pageCount ?? "-"}</p>
             </div>
             <div className={classes.infoSegment}>
               <p className={classes.infoTitle}>PUBLISHED</p>
-              <p className={classes.infoText}>{publishedDate}</p>
+              <p className={classes.infoText}>
+                {publishedDate?.slice(0, 4) ?? "-"}
+              </p>
             </div>
             <div className={classes.infoSegment}>
               <p className={classes.infoTitle}>PUBLISHER</p>
-              <p className={classes.infoText}>{publisher}</p>
+              <p className={classes.infoText}>{publisher ?? "-"}</p>
             </div>
             <div className={classes.infoSegment}>
               <p className={classes.infoTitle}>LANGUAGE</p>
-              <p className={classes.infoText}>{language}</p>
+              <p className={classes.infoText}>
+                {language?.toUpperCase() ?? "-"}
+              </p>
             </div>
           </div>
-          <div
-            className={classes.infoSegment + " " + classes.infoSegment_lightbg}
-          >
-            <p className={classes.infoTitle}>ABOUT THIS BOOK</p>
-            <p className={classes.infoText}>{description}</p>
-          </div>
+          {description && (
+            <div
+              className={
+                classes.infoSegment + " " + classes.infoSegment_lightbg
+              }
+            >
+              <p className={classes.infoTitle}>ABOUT THIS BOOK</p>
+              <p className={classes.infoText}>{description}</p>
+            </div>
+          )}
         </div>
       </article>
     </div>,
