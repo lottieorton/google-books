@@ -1,5 +1,6 @@
 @use "../../sass/variables/colors.scss" as c;
 @use "../../sass/mixins/media-queries" as *;
+@use "../../sass/mixins/mixins" as *;
 
 .form {
   display: flex;
@@ -46,19 +47,11 @@
   }
 }
 .btn {
-  color: white;
-  background-color: c.$primary;
+  @include btn;
   font-size: 1em;
-  font-weight: bold;
-  border-radius: 20px;
-  border-color: c.$border-coloring;
   padding: 6px 16px;
-  &:disabled {
-    opacity: 0.4;
-  }
   @include large-desktop {
     font-size: 1.4em;
-    border-radius: 30px;
     padding: 6px 15px;
   }
 }

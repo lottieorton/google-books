@@ -1,0 +1,30 @@
+@use "../../sass/mixins/mixins" as *;
+@use "../../sass/mixins/media-queries" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  padding: 1.5em;
+  gap: 0.5em;
+  @include large-desktop {
+    gap: 1em;
+  }
+}
+
+.btn {
+  @include btn;
+  font-size: 1.25em;
+  padding: 0px 8px;
+  height: 2em;
+  @include large-desktop {
+    font-size: 1.75em;
+    padding: 4px 10px;
+  }
+}
+
+.pageText {
+  font-size: 1em;
+  @include large-desktop {
+    font-size: 1.4em;
+  }
+}

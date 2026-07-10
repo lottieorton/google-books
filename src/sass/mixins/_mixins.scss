@@ -1,5 +1,6 @@
 @use "../variables/fonts.scss" as f;
 @use "../variables/colors.scss" as c;
+@use "../mixins/media-queries" as *;
 
 @mixin large-heading {
   font-family: f.$header;
@@ -24,5 +25,19 @@
     &_loading {
       background-color: c.$loadingColor;
     }
+  }
+}
+
+@mixin btn {
+  color: white;
+  background-color: c.$primary;
+  font-weight: bold;
+  border-radius: 20px;
+  border-color: c.$border-coloring;
+  &:disabled {
+    opacity: 0.4;
+  }
+  @include large-desktop {
+    border-radius: 30px;
   }
 }
