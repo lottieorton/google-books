@@ -1,16 +1,25 @@
-# React + Vite
+# Google Books
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+Search for your favourite books using the Google Books database
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Contains
 
-## React Compiler
+The webapp contains the following:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Search Bar** - form which submits your requested search to the Google Books API
+- **Book Grid** - books returned from the users search are displayed in a responsive grid
+- **Book Details Modal** - a book card can be clicked to show a modal with additional information
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Mobile-First Design** - this website has been built with a responsive, mobile-first layout
+- **API State Handling** - specific views displayed while waiting for the response from the API, if there are no books returned from the API call, or if there was an error during the API call
+
+## Technologies Used
+
+- React
+- JavaScript
+- HTML
+- SCSS
