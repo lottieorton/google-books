@@ -1,0 +1,108 @@
+@use "../../sass/variables/colors.scss" as c;
+@use "../../sass/mixins/mixins" as *;
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  &_open {
+    display: flex;
+  }
+}
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 5% auto;
+  border: 1px solid c.$border-coloring;
+  width: 60%;
+  overflow: auto;
+  border-radius: 5px;
+}
+.modalHeader {
+  display: flex;
+  align-items: flex-end;
+  padding: 3em 2em 0em 2em;
+  @include book-card-color;
+  position: relative;
+}
+.img {
+  height: 220px;
+  width: auto;
+  object-fit: contain;
+}
+.headerInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  gap: 0.75em;
+}
+.title {
+  @include large-heading;
+  font-size: 1.25em;
+  margin: 0;
+}
+.author {
+  color: black;
+  font-size: 0.9em;
+  margin: 0;
+}
+.close {
+  display: flex;
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  padding: 5px;
+  border-radius: 50%;
+  color: white;
+  background-color: color-mix(in srgb, c.$main-text 50%, transparent);
+  border: none;
+}
+.closeIcon {
+  font-size: 1.75em;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  gap: 1.5em;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  grid-gap: 0.5em;
+}
+
+.infoSegment {
+  display: flex;
+  flex-direction: column;
+  background-color: color-mix(in srgb, c.$main-text 10%, transparent);
+  padding: 0.55em;
+  gap: 0.25em;
+  border-radius: 15px;
+  &_rating {
+    grid-column: span 2;
+  }
+  &_lightbg {
+    background-color: transparent;
+  }
+}
+.infoTitle {
+  font-size: 0.75em;
+  margin: 0;
+}
+.infoText {
+  color: black;
+  font-size: 1em;
+  margin: 0;
+}
+.noImgIcon {
+  color: white;
+  font-size: 6em;
+}

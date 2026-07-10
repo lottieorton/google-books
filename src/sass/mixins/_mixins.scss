@@ -6,3 +6,23 @@
   color: c.$header-text;
   margin: 0;
 }
+
+@mixin book-card-color {
+  &_bgColor {
+    &_0 {
+      background-color: c.$accent;
+    }
+    &_1 {
+      background-color: c.$secondary;
+    }
+    &_2 {
+      background-color: c.$primary;
+    }
+    &_3 {
+      background-color: c.$tertiary;
+    }
+    &_loading {
+      background-color: c.$loadingColor;
+    }
+  }
+}

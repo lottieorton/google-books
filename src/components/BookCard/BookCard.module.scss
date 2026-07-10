@@ -1,7 +1,7 @@
 @use "../../sass/variables/colors.scss" as c;
 @use "../../sass/mixins/media-queries" as *;
+@use "../../sass/mixins/mixins" as *;
 
-$loadingColor: #f0ebe3;
 @keyframes pulse {
   0% {
     opacity: 0.6;
@@ -26,6 +26,10 @@ $loadingColor: #f0ebe3;
   &_loading {
     animation: pulse 1.5s ease-in-out infinite;
   }
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px c.$border-coloring;
+  }
 
   @include large-desktop {
     width: 400px;
@@ -36,25 +40,24 @@ $loadingColor: #f0ebe3;
   flex-direction: column;
   align-items: flex-start;
   height: 300px;
-  padding: 1em 1em 2.5em 1em;
+  padding: 1em;
   gap: 0.5em;
   position: relative;
   @include large-desktop {
     height: 400px;
-    padding: 1.5em 1.5em 3.5em 1.5em;
+    padding: 1.5em;
     gap: 0.75em;
   }
   &::after {
     content: "";
     position: absolute;
-    bottom: 2.5em;
+    bottom: 1em;
     left: 1em;
     width: calc(100% - 2em);
     height: 40px;
     background: linear-gradient(transparent, white);
     @include large-desktop {
       height: 50px;
-      bottom: 3.25em;
       width: calc(100% - 3em);
     }
   }
@@ -65,23 +68,7 @@ $loadingColor: #f0ebe3;
   align-items: center;
   height: 260px;
   padding: 1em;
-  &_bgColor {
-    &_0 {
-      background-color: c.$accent;
-    }
-    &_1 {
-      background-color: c.$secondary;
-    }
-    &_2 {
-      background-color: c.$primary;
-    }
-    &_3 {
-      background-color: c.$tertiary;
-    }
-    &_loading {
-      background-color: $loadingColor;
-    }
-  }
+  @include book-card-color;
 }
 .img {
   height: 220px;
@@ -150,7 +137,7 @@ $loadingColor: #f0ebe3;
   }
 }
 .loadingText {
-  background-color: $loadingColor;
+  background-color: c.$loadingColor;
   border-radius: 10px;
   margin: 0.25em;
   &_small {
