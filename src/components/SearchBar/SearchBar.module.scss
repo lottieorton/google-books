@@ -9,10 +9,14 @@
   border-radius: 25px;
   border: 2px solid c.$border-coloring;
   padding: 5px;
+  max-width: 100%;
   width: 700px;
-  max-width: 80%;
+
   &:focus-within {
     border-color: c.$primary;
+  }
+  @include tablet {
+    max-width: 80%;
   }
   @include large-desktop {
     border-radius: 35px;

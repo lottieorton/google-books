@@ -1,10 +1,14 @@
 @use "./sass/normalize";
 @use "./sass/variables/colors.scss" as c;
 @use "./sass/variables/fonts.scss" as f;
+@use "./sass/mixins/media-queries" as *;
 
 body {
   background-color: c.$bg;
   font-family: f.$text;
   color: c.$main-text;
-  padding: 2em;
+  padding: 1.25em;
+  @include tablet {
+    padding: 2em;
+  }
 }
