@@ -1,6 +1,8 @@
 const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 
 export const getBooksBySearchTerm = async (term, start = 0) => {
+  if (term.trim() === "") return null;
+  if (isNaN(start)) throw new Error("Start number has to be a number");
   const response = await fetch(
     `https://www.googleapis.com/books/v1/volumes?q=${term}&startIndex=${start}&maxResults=20&key=${apiKey}`,
   );

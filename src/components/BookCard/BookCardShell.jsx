@@ -7,6 +7,7 @@ export default function BookCardShell() {
         className={
           classes.imgContainer + " " + classes[`imgContainer_bgColor_loading`]
         }
+        data-testid="image-loading-skeleton"
       >
         <div className={classes.img}></div>
       </div>

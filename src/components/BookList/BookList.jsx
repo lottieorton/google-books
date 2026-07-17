@@ -14,7 +14,9 @@ export default function BookList({ books, searchTerm, totalNumBooks }) {
         </h2>
         <p className={classes.searchResultsText}>{totalNumBooks} books found</p>
       </div>
-      <div className={classes.grid}>{listBooks}</div>
+      <div className={classes.grid} data-testid="book-grid">
+        {listBooks}
+      </div>
     </section>
   );
 }

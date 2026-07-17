@@ -2,7 +2,7 @@ import classes from "./ResultsIssues.module.scss";
 
 export default function FetchError({}) {
   return (
-    <section className={classes.section + " " + classes.section_error}>
+    <article className={classes.section + " " + classes.section_error}>
       <span
         className={
           "material-symbols-outlined " + classes.icon + " " + classes.icon_error
@@ -15,6 +15,6 @@ export default function FetchError({}) {
         Check your internet connection and try again. If the problem persists,
         Google Books may be temporarily unavailable.
       </p>
-    </section>
+    </article>
   );
 }

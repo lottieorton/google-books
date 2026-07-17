@@ -2,7 +2,6 @@ import "./App.scss";
 import { useState } from "react";
 import Header from "./components/Header/Header";
 import SearchBar from "./components/SearchBar/SearchBar";
-import BookList from "./components/BookList/BookList";
 import BooksContainer from "./containers/BooksContainer/BooksContainer";
 
 function App() {

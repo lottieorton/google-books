@@ -2,7 +2,7 @@ import classes from "./ResultsIssues.module.scss";
 
 export default function NoBooks({ searchTerm }) {
   return (
-    <section className={classes.section + " " + classes.section_noBook}>
+    <article className={classes.section + " " + classes.section_noBook}>
       <i
         className={
           classes.icon +
@@ -16,6 +16,6 @@ export default function NoBooks({ searchTerm }) {
         Try checking your spelling, using different keywords or broadening your
         search.
       </p>
-    </section>
+    </article>
   );
 }
