@@ -22,7 +22,7 @@ export default function BooksContainer({ searchTerm }) {
   }
 
   useEffect(() => {
-    if (searchTerm === null) return;
+    if (!searchTerm) return;
 
     const nextStartBook = 20 * effectivePage;
     setStatus("loading");

@@ -21,6 +21,7 @@ export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
+      data-testId="outerSection"
     >
       <article className={classes.modalContainer}>
         <section

@@ -13,6 +13,7 @@ export default function Pagination({
         disabled={currentPage === 0}
         onClick={onPrevious}
         className={classes.btn}
+        aria-label="Previous page"
       >
         <i className="fa-solid fa-angles-left"></i>
       </button>
@@ -23,6 +24,7 @@ export default function Pagination({
         disabled={currentPage === numPages - 1}
         onClick={onNext}
         className={classes.btn}
+        aria-label="Next page"
       >
         <i className="fa-solid fa-angles-right"></i>
       </button>
