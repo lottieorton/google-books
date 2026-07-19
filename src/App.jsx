@@ -1,6 +1,5 @@
 import "./App.scss";
 import { useState } from "react";
-import Header from "./components/Header/Header";
 import SearchBar from "./components/SearchBar/SearchBar";
 import BooksContainer from "./containers/BooksContainer/BooksContainer";
 
@@ -10,7 +9,6 @@ function App() {
 
   return (
     <main className="main">
-      <Header />
       <SearchBar onSearch={onSearch} />
       <BooksContainer searchTerm={searchTerm} />
     </main>

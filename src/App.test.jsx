@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import App from "./App";
-import Header from "./components/Header/Header";
 import BooksContainer from "./containers/BooksContainer/BooksContainer";
 
 vi.mock("./components/Header/Header", () => {
@@ -38,7 +37,6 @@ describe("App", () => {
     //ARRANGE
     render(<App />);
     //ASSERT
-    expect(Header).toHaveBeenCalledOnce();
     expect(mockSearchBarSpy).toHaveBeenCalledOnce();
     expect(BooksContainer).toHaveBeenCalledOnce();
   });
@@ -47,7 +45,6 @@ describe("App", () => {
     //ARRANGE
     render(<App />);
     //ASSERT
-    expect(Header).toHaveBeenCalledOnce();
     expect(mockSearchBarSpy).toHaveBeenCalledOnce();
     expect(BooksContainer).toHaveBeenCalledOnce();
     expect(mockSearchBarSpy).toHaveBeenLastCalledWith(

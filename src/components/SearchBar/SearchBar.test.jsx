@@ -11,6 +11,21 @@ describe("SearchBar", () => {
     vi.clearAllMocks();
   });
 
+  it("Should render with form and header", async () => {
+    //ARRANGE
+    render(<SearchBar onSearch={mockOnSearch} />);
+    //ACT
+    const header = screen.getByRole("heading", { level: 2 });
+    const icon = screen.getByText("import_contacts");
+    const input = screen.getByPlaceholderText("Search books...");
+    const btn = screen.getByRole("button");
+    //ASSERT
+    expect(header).toBeInTheDocument();
+    expect(icon).toBeInTheDocument();
+    expect(input).toBeInTheDocument();
+    expect(btn).toBeInTheDocument();
+  });
+
   it("Should render button as disabled when the input is empty", async () => {
     //ARRANGE
     const user = userEvent.setup();

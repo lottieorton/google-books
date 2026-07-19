@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import classes from "./BooksContainer.module.scss";
 import { getBooksBySearchTerm } from "../../services/books-service";
 import BookList from "../../components/BookList/BookList";
 import BookListShell from "../../components/BookList/BookListShell";
 import NoBooksView from "../../components/ResultsIssues/NoBooksView";
 import FetchErrorView from "../../components/ResultsIssues/FetchErrorView";
 import Pagination from "../../components/Pagination/Pagination";
+import Header from "../../components/Header/Header";
 
 export default function BooksContainer({ searchTerm }) {
   const [books, setBooks] = useState(null);
@@ -38,7 +40,7 @@ export default function BooksContainer({ searchTerm }) {
       });
   }, [searchTerm, effectivePage]);
 
-  if (status === "pending") return;
+  if (status === "pending") return <Header />;
 
   if (status === "loading") return <BookListShell />;
 
@@ -49,7 +51,7 @@ export default function BooksContainer({ searchTerm }) {
       return <NoBooksView searchTerm={searchTerm} />;
     }
     return (
-      <>
+      <div className={classes.container}>
         <BookList
           books={books}
           searchTerm={searchTerm}
@@ -67,7 +69,7 @@ export default function BooksContainer({ searchTerm }) {
             setCurrentPage(currentPage - 1);
           }}
         />
-      </>
+      </div>
     );
   }
 }

@@ -19,6 +19,13 @@ vi.mock("../../components/BookList/BookListShell", () => {
     },
   };
 });
+vi.mock("../../components/Header/Header", () => {
+  return {
+    default: function MockHeader(props) {
+      return <div data-testid="header" />;
+    },
+  };
+});
 vi.mock("../../components/ResultsIssues/FetchErrorView", () => {
   return {
     default: function MockFetchErrorView(props) {
@@ -70,18 +77,18 @@ describe("BooksContainer", () => {
     vi.clearAllMocks();
   });
 
-  it("Should start in a pending state", () => {
+  it("Should render the Header component when it starts in a pending state", () => {
     //ACT
     const { container } = render(<BooksContainer searchTerm={null} />);
     //ASSERT
-    expect(container).toBeEmptyDOMElement();
+    expect(screen.getByTestId("header")).toBeInTheDocument();
   });
 
   it("Should not call getBooksBySearchTerm for empty search term", () => {
     //ACT
     const { container } = render(<BooksContainer searchTerm="" />);
     //ASSERT
-    expect(container).toBeEmptyDOMElement();
+    expect(screen.getByTestId("header")).toBeInTheDocument();
     expect(getBooksBySearchTerm).not.toHaveBeenCalled();
   });
 
