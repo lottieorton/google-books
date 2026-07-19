@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import NoBooks from "./NoBooksView";
-import { SearchTermContext } from "../../context/SearchTermContext";
+import { SearchTermContext } from "../../context/SearchTermContext/SearchTermContext";
 
 describe("NoBooks", () => {
   vi.mock("./ResultsIssues", () => {

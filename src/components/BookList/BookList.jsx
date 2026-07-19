@@ -1,8 +1,8 @@
 import classes from "./BookList.module.scss";
 import BookCard from "../BookCard/BookCard";
 import BookCardShell from "../BookCard/BookCardShell";
-import { useSearchTerm } from "../../context/SearchTermContext";
-import { useBookResults } from "../../context/BookResultContext";
+import { useSearchTerm } from "../../context/SearchTermContext/SearchTermContext";
+import { useBookResults } from "../../context/BookResultContext/BookResultContext";
 
 export default function BookList({ isLoading = false }) {
   const { searchTerm } = useSearchTerm();

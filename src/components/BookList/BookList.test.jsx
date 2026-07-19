@@ -2,8 +2,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import BookList from "./BookList";
-import { SearchTermContext } from "../../context/SearchTermContext";
-import { BookResultsContext } from "../../context/BookResultContext";
+import { SearchTermContext } from "../../context/SearchTermContext/SearchTermContext";
+import { BookResultsContext } from "../../context/BookResultContext/BookResultContext";
 
 vi.mock("../BookCard/BookCard", () => {
   return {

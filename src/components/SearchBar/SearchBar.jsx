@@ -1,6 +1,6 @@
 import { useState } from "react";
 import classes from "./SearchBar.module.scss";
-import { useSearchTerm } from "../../context/SearchTermContext";
+import { useSearchTerm } from "../../context/SearchTermContext/SearchTermContext";
 
 export default function SearchBar() {
   const { onSearch } = useSearchTerm();

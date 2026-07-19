@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { userEvent } from "@testing-library/user-event";
 import SearchBar from "./SearchBar";
-import { SearchTermContext } from "../../context/SearchTermContext";
+import { SearchTermContext } from "../../context/SearchTermContext/SearchTermContext";
 
 describe("SearchBar", () => {
   const mockOnSearch = vi.fn();

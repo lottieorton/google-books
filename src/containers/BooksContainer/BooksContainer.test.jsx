@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
 import BooksContainer from "./BooksContainer";
 //import mocked components
-import { BookResultsContext } from "../../context/BookResultContext";
+import { BookResultsContext } from "../../context/BookResultContext/BookResultContext";
 
 //mocking Components and services
 vi.mock("../../components/Header/Header", () => {

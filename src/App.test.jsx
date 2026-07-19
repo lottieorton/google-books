@@ -4,16 +4,16 @@ import { describe, expect, it } from "vitest";
 import App from "./App";
 import BooksContainer from "./containers/BooksContainer/BooksContainer";
 import SearchBar from "./components/SearchBar/SearchBar";
-import { useBookResults } from "./context/BookResultContext";
+import { useBookResults } from "./context/BookResultContext/BookResultContext";
 
-vi.mock("./context/BookResultContext", () => {
+vi.mock("./context/BookResultContext/BookResultContext", () => {
   return {
     default: function MockBookResultProvider({ children }) {
       return <div data-testid="book-result-provider">{children}</div>;
     },
   };
 });
-vi.mock("./context/SearchTermContext", () => {
+vi.mock("./context/SearchTermContext/SearchTermContext", () => {
   return {
     default: function MockSearchTermProvider({ children }) {
       return <div data-testid="search-term-provider">{children}</div>;

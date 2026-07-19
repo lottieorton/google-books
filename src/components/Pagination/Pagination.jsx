@@ -1,4 +1,4 @@
-import { useBookResults } from "../../context/BookResultContext";
+import { useBookResults } from "../../context/BookResultContext/BookResultContext";
 import classes from "./Pagination.module.scss";
 
 export default function Pagination() {

@@ -1,4 +1,4 @@
-import { useSearchTerm } from "../../context/SearchTermContext";
+import { useSearchTerm } from "../../context/SearchTermContext/SearchTermContext";
 import ResultsIssues from "./ResultsIssues";
 import classes from "./ResultsIssues.module.scss";
 

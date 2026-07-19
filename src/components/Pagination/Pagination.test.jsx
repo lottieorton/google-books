@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { userEvent } from "@testing-library/user-event";
 import Pagination from "./Pagination";
-import { BookResultsContext } from "../../context/BookResultContext";
+import { BookResultsContext } from "../../context/BookResultContext/BookResultContext";
 
 describe("Pagination", () => {
   const mockSetCurrentPage = vi.fn();

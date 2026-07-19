@@ -2,8 +2,8 @@ import "./App.scss";
 import { useState } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import BooksContainer from "./containers/BooksContainer/BooksContainer";
-import SearchTermProvider from "./context/SearchTermContext";
-import BookResultsProvider from "./context/BookResultContext";
+import SearchTermProvider from "./context/SearchTermContext/SearchTermContext";
+import BookResultsProvider from "./context/BookResultContext/BookResultContext";
 
 function App() {
   return (

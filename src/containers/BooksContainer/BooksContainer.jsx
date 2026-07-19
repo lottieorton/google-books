@@ -4,7 +4,7 @@ import NoBooksView from "../../components/ResultsIssues/NoBooksView";
 import FetchErrorView from "../../components/ResultsIssues/FetchErrorView";
 import Pagination from "../../components/Pagination/Pagination";
 import Header from "../../components/Header/Header";
-import { useBookResults } from "../../context/BookResultContext";
+import { useBookResults } from "../../context/BookResultContext/BookResultContext";
 
 export default function BooksContainer() {
   const { status, error } = useBookResults();

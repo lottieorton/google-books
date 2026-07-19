@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useRef } from "react";
-import { getBooksBySearchTerm } from "../services/books-service";
-import { useSearchTerm } from "./SearchTermContext";
+import { getBooksBySearchTerm } from "../../services/books-service";
+import { useSearchTerm } from "../SearchTermContext/SearchTermContext";
 
 export const BookResultsContext = createContext(null);
 

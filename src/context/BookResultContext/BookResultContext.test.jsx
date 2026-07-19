@@ -3,12 +3,12 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
 import { userEvent } from "@testing-library/user-event";
 //import mocked components
-import { getBooksBySearchTerm } from "../services/books-service";
+import { getBooksBySearchTerm } from "../../services/books-service";
 import BookResultsProvider, { useBookResults } from "./BookResultContext";
-import { SearchTermContext } from "./SearchTermContext";
+import { SearchTermContext } from "../SearchTermContext/SearchTermContext";
 
 //mocking Components and services
-vi.mock("../services/books-service", () => ({
+vi.mock("../../services/books-service", () => ({
   getBooksBySearchTerm: vi.fn(),
 }));
 
