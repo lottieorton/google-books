@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import NoBooks from "./NoBooksView";
+import { SearchTermContext } from "../../context/SearchTermContext";
 
 describe("NoBooks", () => {
   vi.mock("./ResultsIssues", () => {
@@ -20,7 +21,11 @@ describe("NoBooks", () => {
   });
   it("Should pass correct props to ResultsIssues", () => {
     //ARRANGE
-    render(<NoBooks searchTerm="test search" />);
+    render(
+      <SearchTermContext.Provider value={{ searchTerm: "test search" }}>
+        <NoBooks />
+      </SearchTermContext.Provider>,
+    );
     //ACT
     const noBooksDisplay = screen.getByTestId("mock-results-issues");
     const icon = screen.getByTestId("noBookIcon");

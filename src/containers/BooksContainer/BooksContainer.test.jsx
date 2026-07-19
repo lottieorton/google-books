@@ -1,17 +1,11 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
-import { userEvent } from "@testing-library/user-event";
 import BooksContainer from "./BooksContainer";
 //import mocked components
-import { getBooksBySearchTerm } from "../../services/books-service";
-import BookList from "../../components/BookList/BookList";
-import Pagination from "../../components/Pagination/Pagination";
+import { BookResultsContext } from "../../context/BookResultContext";
 
 //mocking Components and services
-vi.mock("../../services/books-service", () => ({
-  getBooksBySearchTerm: vi.fn(),
-}));
 vi.mock("../../components/Header/Header", () => {
   return {
     default: function MockHeader(props) {
@@ -70,125 +64,83 @@ describe("BooksContainer", () => {
     vi.clearAllMocks();
   });
 
-  it("Should render the Header component when it starts in a pending state", () => {
+  it("Should render the Header component when in a pending state", () => {
     //ACT
-    const { container } = render(<BooksContainer searchTerm={null} />);
-    //ASSERT
-    expect(screen.getByTestId("header")).toBeInTheDocument();
-  });
-
-  it("Should not call getBooksBySearchTerm for empty search term", () => {
-    //ACT
-    const { container } = render(<BooksContainer searchTerm="" />);
-    //ASSERT
-    expect(screen.getByTestId("header")).toBeInTheDocument();
-    expect(getBooksBySearchTerm).not.toHaveBeenCalled();
-  });
-
-  it("Should render the BookList component when status is loading", async () => {
-    //ARRANGE
-    vi.mocked(getBooksBySearchTerm).mockReturnValue(new Promise(() => {}));
-    render(<BooksContainer searchTerm="book" />);
-    //ASSERT
-    await waitFor(() => {
-      expect(
-        screen.getByTestId("book-list-isLoading-true"),
-      ).toBeInTheDocument();
-    });
-  });
-
-  it("Should render the NoBooks view if status is error with error message 'No Books Found'", async () => {
-    //ARRANGE
-    vi.mocked(getBooksBySearchTerm).mockRejectedValue(
-      new Error("No books found"),
+    const { container } = render(
+      <BookResultsContext.Provider
+        value={{
+          status: "pending",
+        }}
+      >
+        <BooksContainer />
+      </BookResultsContext.Provider>,
     );
-    render(<BooksContainer searchTerm="empty" />);
-    //ACT
-    await waitFor(() => {
-      expect(screen.getByTestId("no-books-view")).toBeInTheDocument();
-    });
+    //ASSERT
+    expect(screen.getByTestId("header")).toBeInTheDocument();
   });
 
-  it("Should render the FetchErrorView if status is error with a non-'No Books Found' error message", async () => {
+  it("Should render the BookList component when status is loading", () => {
     //ARRANGE
-    vi.mocked(getBooksBySearchTerm).mockRejectedValue(() => {});
-    render(<BooksContainer searchTerm="error" />);
-    //ACT
-    await waitFor(() => {
-      expect(screen.getByTestId("fetch-error-view")).toBeInTheDocument();
-    });
+    render(
+      <BookResultsContext.Provider
+        value={{
+          status: "loading",
+        }}
+      >
+        <BooksContainer />
+      </BookResultsContext.Provider>,
+    );
+    //ASSERT
+    expect(screen.getByTestId("book-list-isLoading-true")).toBeInTheDocument();
   });
 
-  it("Should render the BookList and Pagination views if status is success", async () => {
+  it("Should render the NoBooks view if status is error with error message 'No Books Found'", () => {
     //ARRANGE
-    vi.mocked(getBooksBySearchTerm).mockResolvedValue(mockBooksData);
-    render(<BooksContainer searchTerm="success" />);
+    render(
+      <BookResultsContext.Provider
+        value={{
+          status: "error",
+          error: "No books found",
+        }}
+      >
+        <BooksContainer />
+      </BookResultsContext.Provider>,
+    );
     //ACT
-    await waitFor(() => {
-      expect(
-        screen.getByTestId("book-list-isLoading-undefined"),
-      ).toBeInTheDocument();
-      expect(screen.getByTestId("pagination")).toBeInTheDocument();
-    });
+    expect(screen.getByTestId("no-books-view")).toBeInTheDocument();
   });
 
-  it("Should pass the correct props to the BookList and Pagination views if status is success", async () => {
+  it("Should render the FetchErrorView if status is error with a non-'No Books Found' error message", () => {
     //ARRANGE
-    vi.mocked(getBooksBySearchTerm).mockResolvedValue(mockBooksData);
-    render(<BooksContainer searchTerm="success" />);
+    render(
+      <BookResultsContext.Provider
+        value={{
+          status: "error",
+          error: "Bad request",
+        }}
+      >
+        <BooksContainer />
+      </BookResultsContext.Provider>,
+    );
     //ACT
-    await waitFor(() => {
-      expect(
-        screen.getByTestId("book-list-isLoading-undefined"),
-      ).toBeInTheDocument();
-      expect(screen.getByTestId("pagination")).toBeInTheDocument();
-      expect(mockBookListSpy).toHaveBeenCalledWith(
-        expect.objectContaining({
-          books: mockBooksData.items,
-          searchTerm: "success",
-          totalNumBooks: mockBooksData.totalItems,
-        }),
-      );
-      expect(mockPaginationsSpy).toHaveBeenCalledWith(
-        expect.objectContaining({
-          currentPage: 0,
-          totalNumBooks: 10,
-          onNext: expect.any(Function),
-          onPrevious: expect.any(Function),
-        }),
-      );
-    });
+    expect(screen.getByTestId("fetch-error-view")).toBeInTheDocument();
   });
 
-  it("Should set current page to 0 if a new search term is received", async () => {
+  it("Should render the BookList and Pagination views if status is success", () => {
     //ARRANGE
-    vi.mocked(getBooksBySearchTerm).mockResolvedValue(mockBooksData);
-    const { rerender } = render(<BooksContainer searchTerm="first" />);
+    render(
+      <BookResultsContext.Provider
+        value={{
+          status: "success",
+        }}
+      >
+        <BooksContainer />
+      </BookResultsContext.Provider>,
+    );
     //ACT
-    await waitFor(() => {
-      expect(mockPaginationsSpy).toHaveBeenCalled();
-      expect(mockPaginationsSpy).toHaveBeenCalledWith(
-        expect.objectContaining({
-          currentPage: 0,
-        }),
-      );
-    });
-    const paginationProps = mockPaginationsSpy.mock.lastCall[0];
-    paginationProps.onNext();
-    await waitFor(() => {
-      expect(mockPaginationsSpy).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          currentPage: 1,
-        }),
-      );
-    });
-    rerender(<BooksContainer searchTerm="second" />);
-    await waitFor(() => {
-      expect(mockPaginationsSpy).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          currentPage: 0,
-        }),
-      );
-    });
+    expect(
+      screen.getByTestId("book-list-isLoading-undefined"),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("pagination")).toBeInTheDocument();
   });
 });

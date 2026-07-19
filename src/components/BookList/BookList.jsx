@@ -1,13 +1,13 @@
 import classes from "./BookList.module.scss";
 import BookCard from "../BookCard/BookCard";
 import BookCardShell from "../BookCard/BookCardShell";
+import { useSearchTerm } from "../../context/SearchTermContext";
+import { useBookResults } from "../../context/BookResultContext";
 
-export default function BookList({
-  books = [],
-  searchTerm,
-  totalNumBooks,
-  isLoading = false,
-}) {
+export default function BookList({ isLoading = false }) {
+  const { searchTerm } = useSearchTerm();
+  const { books = [], totalNumBooks } = useBookResults();
+
   const listBooks = !isLoading
     ? books.map((book, index) => {
         return <BookCard key={book.id} book={book.volumeInfo} index={index} />;

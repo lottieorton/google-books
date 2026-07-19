@@ -2,6 +2,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import BookList from "./BookList";
+import { SearchTermContext } from "../../context/SearchTermContext";
+import { BookResultsContext } from "../../context/BookResultContext";
 
 vi.mock("../BookCard/BookCard", () => {
   return {
@@ -44,11 +46,16 @@ describe("BookList", () => {
   it("Should render successful search results information and books", () => {
     //ARRANGE
     render(
-      <BookList
-        books={books}
-        searchTerm="test searchterm"
-        totalNumBooks={100}
-      />,
+      <SearchTermContext.Provider value={{ searchTerm: "test searchterm" }}>
+        <BookResultsContext.Provider
+          value={{
+            books: books,
+            totalNumBooks: 100,
+          }}
+        >
+          <BookList />,
+        </BookResultsContext.Provider>
+      </SearchTermContext.Provider>,
     );
     //ACT
     const searchResultsHeader = screen.getByRole("heading", { level: 2 });
@@ -71,7 +78,16 @@ describe("BookList", () => {
     //ARRANGE
     const books = [];
     render(
-      <BookList books={books} searchTerm="test searchterm" totalNumBooks={0} />,
+      <SearchTermContext.Provider value={{ searchTerm: "test searchterm" }}>
+        <BookResultsContext.Provider
+          value={{
+            books: books,
+            totalNumBooks: 0,
+          }}
+        >
+          <BookList />,
+        </BookResultsContext.Provider>
+      </SearchTermContext.Provider>,
     );
     //ACT
     const grid = screen.getByTestId("book-grid");
@@ -82,7 +98,18 @@ describe("BookList", () => {
 
   it("Should render 10 empty containers when isLoading", () => {
     //ARRANGE
-    render(<BookList isLoading />);
+    render(
+      <SearchTermContext.Provider value={{ searchTerm: "test searchterm" }}>
+        <BookResultsContext.Provider
+          value={{
+            books: [],
+            // totalNumBooks: ,
+          }}
+        >
+          <BookList isLoading />,
+        </BookResultsContext.Provider>
+      </SearchTermContext.Provider>,
+    );
     //ACT
     const bookCardShells = screen.getAllByTestId("book-card-shell");
     //ASSERT
@@ -91,7 +118,18 @@ describe("BookList", () => {
 
   it("Shouldn't render search term results message when isLoading", () => {
     //ARRANGE
-    render(<BookList isLoading />);
+    render(
+      <SearchTermContext.Provider value={{ searchTerm: "test searchterm" }}>
+        <BookResultsContext.Provider
+          value={{
+            books: [],
+            // totalNumBooks: ,
+          }}
+        >
+          <BookList isLoading />,
+        </BookResultsContext.Provider>
+      </SearchTermContext.Provider>,
+    );
     //ACT
     const bookCardShells = screen.getAllByTestId("book-card-shell");
     const searchResultsHeader = screen.queryByRole("heading", { level: 2 });

@@ -2,16 +2,19 @@ import "./App.scss";
 import { useState } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import BooksContainer from "./containers/BooksContainer/BooksContainer";
+import SearchTermProvider from "./context/SearchTermContext";
+import BookResultsProvider from "./context/BookResultContext";
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState(null);
-  const onSearch = (value) => setSearchTerm(value);
-
   return (
-    <main className="main">
-      <SearchBar onSearch={onSearch} />
-      <BooksContainer searchTerm={searchTerm} />
-    </main>
+    <SearchTermProvider>
+      <BookResultsProvider>
+        <main className="main">
+          <SearchBar />
+          <BooksContainer />
+        </main>
+      </BookResultsProvider>
+    </SearchTermProvider>
   );
 }
 

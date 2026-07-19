@@ -1,7 +1,10 @@
 import { useState } from "react";
 import classes from "./SearchBar.module.scss";
+import { useSearchTerm } from "../../context/SearchTermContext";
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar() {
+  const { onSearch } = useSearchTerm();
+
   const [input, setInput] = useState("");
 
   const handleChange = (e) => {
