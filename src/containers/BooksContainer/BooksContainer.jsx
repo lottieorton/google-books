@@ -10,6 +10,7 @@ import Header from "../../components/Header/Header";
 export default function BooksContainer({ searchTerm }) {
   const [books, setBooks] = useState(null);
   const [status, setStatus] = useState("pending");
+  const [error, setError] = useState("");
   const [totalNumBooks, setTotalNumBooks] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -35,6 +36,7 @@ export default function BooksContainer({ searchTerm }) {
       })
       .catch((err) => {
         setStatus("error");
+        setError(err.message);
         console.error(err);
       });
   }, [searchTerm, effectivePage]);
@@ -43,12 +45,13 @@ export default function BooksContainer({ searchTerm }) {
 
   if (status === "loading") return <BookList isLoading />;
 
-  if (status === "error") return <FetchErrorView />;
+  if (status === "error") {
+    if (error === "No books found")
+      return <NoBooksView searchTerm={searchTerm} />;
+    return <FetchErrorView />;
+  }
 
   if (status === "success") {
-    if (!books || books.length === 0) {
-      return <NoBooksView searchTerm={searchTerm} />;
-    }
     return (
       <div className={classes.container}>
         <BookList

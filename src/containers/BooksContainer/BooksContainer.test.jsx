@@ -97,7 +97,19 @@ describe("BooksContainer", () => {
     });
   });
 
-  it("Should render the FetchErrorView if status is error", async () => {
+  it("Should render the NoBooks view if status is error with error message 'No Books Found'", async () => {
+    //ARRANGE
+    vi.mocked(getBooksBySearchTerm).mockRejectedValue(
+      new Error("No books found"),
+    );
+    render(<BooksContainer searchTerm="empty" />);
+    //ACT
+    await waitFor(() => {
+      expect(screen.getByTestId("no-books-view")).toBeInTheDocument();
+    });
+  });
+
+  it("Should render the FetchErrorView if status is error with a non-'No Books Found' error message", async () => {
     //ARRANGE
     vi.mocked(getBooksBySearchTerm).mockRejectedValue(() => {});
     render(<BooksContainer searchTerm="error" />);
@@ -107,27 +119,7 @@ describe("BooksContainer", () => {
     });
   });
 
-  it("Should render the NoBooks view if status is success and books has zero length", async () => {
-    //ARRANGE
-    vi.mocked(getBooksBySearchTerm).mockResolvedValue(mockEmptyData);
-    render(<BooksContainer searchTerm="empty" />);
-    //ACT
-    await waitFor(() => {
-      expect(screen.getByTestId("no-books-view")).toBeInTheDocument();
-    });
-  });
-
-  it("Should render the NoBooks view if status is success and there were no books", async () => {
-    //ARRANGE
-    vi.mocked(getBooksBySearchTerm).mockResolvedValue({});
-    render(<BooksContainer searchTerm="empty" />);
-    //ACT
-    await waitFor(() => {
-      expect(screen.getByTestId("no-books-view")).toBeInTheDocument();
-    });
-  });
-
-  it("Should render the BookList and Pagination views if status is success and returns some books", async () => {
+  it("Should render the BookList and Pagination views if status is success", async () => {
     //ARRANGE
     vi.mocked(getBooksBySearchTerm).mockResolvedValue(mockBooksData);
     render(<BooksContainer searchTerm="success" />);
@@ -140,7 +132,7 @@ describe("BooksContainer", () => {
     });
   });
 
-  it("Should pass the correct props to the BookList and Pagination views if status is success and returns some books", async () => {
+  it("Should pass the correct props to the BookList and Pagination views if status is success", async () => {
     //ARRANGE
     vi.mocked(getBooksBySearchTerm).mockResolvedValue(mockBooksData);
     render(<BooksContainer searchTerm="success" />);
