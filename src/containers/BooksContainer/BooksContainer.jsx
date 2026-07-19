@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import classes from "./BooksContainer.module.scss";
 import { getBooksBySearchTerm } from "../../services/books-service";
 import BookList from "../../components/BookList/BookList";
-import BookListShell from "../../components/BookList/BookListShell";
 import NoBooksView from "../../components/ResultsIssues/NoBooksView";
 import FetchErrorView from "../../components/ResultsIssues/FetchErrorView";
 import Pagination from "../../components/Pagination/Pagination";
@@ -42,7 +41,7 @@ export default function BooksContainer({ searchTerm }) {
 
   if (status === "pending") return <Header />;
 
-  if (status === "loading") return <BookListShell />;
+  if (status === "loading") return <BookList isLoading />;
 
   if (status === "error") return <FetchErrorView />;
 

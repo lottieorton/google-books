@@ -12,13 +12,6 @@ import Pagination from "../../components/Pagination/Pagination";
 vi.mock("../../services/books-service", () => ({
   getBooksBySearchTerm: vi.fn(),
 }));
-vi.mock("../../components/BookList/BookListShell", () => {
-  return {
-    default: function MockBookListShell(props) {
-      return <div data-testid="book-list-shell" />;
-    },
-  };
-});
 vi.mock("../../components/Header/Header", () => {
   return {
     default: function MockHeader(props) {
@@ -45,7 +38,7 @@ vi.mock("../../components/BookList/BookList", () => {
   return {
     default: function MockBookList(props) {
       mockBookListSpy(props);
-      return <div data-testid="book-list" />;
+      return <div data-testid={`book-list-isLoading-${props.isLoading}`} />;
     },
   };
 });
@@ -92,13 +85,15 @@ describe("BooksContainer", () => {
     expect(getBooksBySearchTerm).not.toHaveBeenCalled();
   });
 
-  it("Should render the BookShellList component when status is loading", async () => {
+  it("Should render the BookList component when status is loading", async () => {
     //ARRANGE
     vi.mocked(getBooksBySearchTerm).mockReturnValue(new Promise(() => {}));
     render(<BooksContainer searchTerm="book" />);
     //ASSERT
     await waitFor(() => {
-      expect(screen.getByTestId("book-list-shell")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("book-list-isLoading-true"),
+      ).toBeInTheDocument();
     });
   });
 
@@ -138,7 +133,9 @@ describe("BooksContainer", () => {
     render(<BooksContainer searchTerm="success" />);
     //ACT
     await waitFor(() => {
-      expect(screen.getByTestId("book-list")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("book-list-isLoading-undefined"),
+      ).toBeInTheDocument();
       expect(screen.getByTestId("pagination")).toBeInTheDocument();
     });
   });
@@ -149,7 +146,9 @@ describe("BooksContainer", () => {
     render(<BooksContainer searchTerm="success" />);
     //ACT
     await waitFor(() => {
-      expect(screen.getByTestId("book-list")).toBeInTheDocument();
+      expect(
+        screen.getByTestId("book-list-isLoading-undefined"),
+      ).toBeInTheDocument();
       expect(screen.getByTestId("pagination")).toBeInTheDocument();
       expect(mockBookListSpy).toHaveBeenCalledWith(
         expect.objectContaining({
