@@ -1,12 +1,18 @@
+import { useBookResults } from "../../context/BookResultContext/BookResultContext";
 import classes from "./Pagination.module.scss";
 
-export default function Pagination({
-  currentPage,
-  totalNumBooks,
-  onNext,
-  onPrevious,
-}) {
+export default function Pagination() {
+  const { totalNumBooks, currentPage, setCurrentPage } = useBookResults();
   const numPages = Math.ceil(totalNumBooks / 20);
+  const onNext = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setCurrentPage(currentPage + 1);
+  };
+  const onPrevious = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setCurrentPage(currentPage - 1);
+  };
+
   return (
     <div className={classes.container}>
       <button

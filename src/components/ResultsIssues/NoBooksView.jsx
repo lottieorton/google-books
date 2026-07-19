@@ -1,8 +1,14 @@
+import { useSearchTerm } from "../../context/SearchTermContext/SearchTermContext";
+import ResultsIssues from "./ResultsIssues";
 import classes from "./ResultsIssues.module.scss";
 
-export default function NoBooks({ searchTerm }) {
+export default function NoBooks() {
+  const { searchTerm } = useSearchTerm();
+  const header = `No books found for "${searchTerm}"`;
+  const text =
+    "Try checking your spelling, using different keywords or broadening your search.";
   return (
-    <article className={classes.section + " " + classes.section_noBook}>
+    <ResultsIssues type="noBook" header={header} text={text}>
       <i
         className={
           classes.icon +
@@ -10,12 +16,8 @@ export default function NoBooks({ searchTerm }) {
           classes.icon_noBook +
           " fa-solid fa-magnifying-glass"
         }
+        data-testid="noBookIcon"
       ></i>
-      <h2 className={classes.header}>No books found for "{searchTerm}"</h2>
-      <p className={classes.text}>
-        Try checking your spelling, using different keywords or broadening your
-        search.
-      </p>
-    </article>
+    </ResultsIssues>
   );
 }

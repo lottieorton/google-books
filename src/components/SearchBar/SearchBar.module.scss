@@ -2,6 +2,54 @@
 @use "../../sass/mixins/media-queries" as *;
 @use "../../sass/mixins/mixins" as *;
 
+.searchBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  gap: 1em;
+  background-color: c.$bg;
+  z-index: 1;
+  border-bottom: 1px solid c.$border-coloring;
+  width: 100%;
+  padding: 1em 1.25em;
+  @include large-phone {
+    flex-direction: row;
+    padding: 1em 2em;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.heading {
+  @include large-heading;
+  font-size: 1.5em;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.5em;
+  @include large-desktop {
+    font-size: 2.2em;
+    line-height: 2.2em;
+  }
+}
+
+.bookIcon {
+  color: white;
+  background-color: c.$primary;
+  font-size: 1.5em;
+  padding: 0.3em;
+  border-radius: 15px;
+  @include large-desktop {
+    font-size: 2.2em;
+  }
+}
+
 .form {
   display: flex;
   justify-content: center;

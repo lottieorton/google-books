@@ -2,12 +2,14 @@ import { describe, it, expect } from "vitest";
 import { getBooksBySearchTerm } from "./books-service";
 
 describe("getBooksBySearchTerm", () => {
-  it("Should throw an error when passed an empty search term", () => {
-    return getBooksBySearchTerm("").then((data) => expect(data).toBe(null));
+  it("Should throw an error when passed an empty search term", async () => {
+    await expect(getBooksBySearchTerm("")).rejects.toThrow("No books found");
   });
 
-  it("Should throw an error when passed an empty search string", () => {
-    return getBooksBySearchTerm("    ").then((data) => expect(data).toBe(null));
+  it("Should throw an error when passed an empty search string", async () => {
+    await expect(getBooksBySearchTerm("     ")).rejects.toThrow(
+      "No books found",
+    );
   });
 
   it("Should throw an error when passed a non-number start index", () => {
@@ -25,7 +27,7 @@ describe("getBooksBySearchTerm", () => {
     );
   });
 
-  it("Should return null if totalItems = 0", async () => {
+  it("Should throw an error if totalItems = 0", async () => {
     const spyFetch = vi.spyOn(window, "fetch");
     const mock = {
       ok: true,
@@ -34,11 +36,10 @@ describe("getBooksBySearchTerm", () => {
       },
     };
     spyFetch.mockResolvedValue(mock);
-    const result = await getBooksBySearchTerm("empty");
-    expect(result).toBe(null);
+    await expect(getBooksBySearchTerm("")).rejects.toThrow("No books found");
   });
 
-  it("Should return null if there is are no items", async () => {
+  it("Should throw an error if there are no items", async () => {
     const spyFetch = vi.spyOn(window, "fetch");
     const mock = {
       ok: true,
@@ -47,8 +48,7 @@ describe("getBooksBySearchTerm", () => {
       },
     };
     spyFetch.mockResolvedValue(mock);
-    const result = await getBooksBySearchTerm("empty");
-    expect(result).toBe(null);
+    await expect(getBooksBySearchTerm("")).rejects.toThrow("No books found");
   });
 
   it("Should return data if api is successful", async () => {

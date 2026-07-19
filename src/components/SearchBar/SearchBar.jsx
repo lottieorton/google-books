@@ -1,7 +1,10 @@
 import { useState } from "react";
 import classes from "./SearchBar.module.scss";
+import { useSearchTerm } from "../../context/SearchTermContext/SearchTermContext";
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar() {
+  const { onSearch } = useSearchTerm();
+
   const [input, setInput] = useState("");
 
   const handleChange = (e) => {
@@ -17,18 +20,29 @@ export default function SearchBar({ onSearch }) {
   const isInputEmpty = input === "";
 
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
-      <i className={classes.icon + " fa-solid fa-magnifying-glass"}></i>
-      <input
-        className={classes.input}
-        type="text"
-        placeholder="Search books..."
-        value={input}
-        onChange={handleChange}
-      />
-      <button className={classes.btn} disabled={isInputEmpty}>
-        Go
-      </button>
-    </form>
+    <section className={classes.searchBar}>
+      <div className={classes.header}>
+        <span className={classes.bookIcon + " material-symbols-outlined"}>
+          import_contacts
+        </span>
+        <h2 className={classes.heading}>bookfinder</h2>
+      </div>
+      <form className={classes.form} onSubmit={handleSubmit}>
+        <i
+          className={classes.icon + " fa-solid fa-magnifying-glass"}
+          aria-hidden="true"
+        ></i>
+        <input
+          className={classes.input}
+          type="text"
+          placeholder="Search books..."
+          value={input}
+          onChange={handleChange}
+        />
+        <button className={classes.btn} disabled={isInputEmpty}>
+          Go
+        </button>
+      </form>
+    </section>
   );
 }

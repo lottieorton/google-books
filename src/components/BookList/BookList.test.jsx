@@ -2,11 +2,21 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import BookList from "./BookList";
+import { SearchTermContext } from "../../context/SearchTermContext/SearchTermContext";
+import { BookResultsContext } from "../../context/BookResultContext/BookResultContext";
 
 vi.mock("../BookCard/BookCard", () => {
   return {
     default: function MockBookCard(props) {
       return <p>{`${props.book.title} ${props.index}`}</p>;
+    },
+  };
+});
+
+vi.mock("../BookCard/BookCardShell", () => {
+  return {
+    default: function MockBookCardShell(props) {
+      return <p data-testid="book-card-shell">{props.key}</p>;
     },
   };
 });
@@ -33,14 +43,19 @@ describe("BookList", () => {
     },
   ];
 
-  it("Should renders search results", () => {
+  it("Should render successful search results information and books", () => {
     //ARRANGE
     render(
-      <BookList
-        books={books}
-        searchTerm="test searchterm"
-        totalNumBooks={100}
-      />,
+      <SearchTermContext.Provider value={{ searchTerm: "test searchterm" }}>
+        <BookResultsContext.Provider
+          value={{
+            books: books,
+            totalNumBooks: 100,
+          }}
+        >
+          <BookList />,
+        </BookResultsContext.Provider>
+      </SearchTermContext.Provider>,
     );
     //ACT
     const searchResultsHeader = screen.getByRole("heading", { level: 2 });
@@ -63,12 +78,63 @@ describe("BookList", () => {
     //ARRANGE
     const books = [];
     render(
-      <BookList books={books} searchTerm="test searchterm" totalNumBooks={0} />,
+      <SearchTermContext.Provider value={{ searchTerm: "test searchterm" }}>
+        <BookResultsContext.Provider
+          value={{
+            books: books,
+            totalNumBooks: 0,
+          }}
+        >
+          <BookList />,
+        </BookResultsContext.Provider>
+      </SearchTermContext.Provider>,
     );
     //ACT
     const grid = screen.getByTestId("book-grid");
     //ASSERT
     expect(grid).toBeInTheDocument();
     expect(grid).toBeEmptyDOMElement();
+  });
+
+  it("Should render 10 empty containers when isLoading", () => {
+    //ARRANGE
+    render(
+      <SearchTermContext.Provider value={{ searchTerm: "test searchterm" }}>
+        <BookResultsContext.Provider
+          value={{
+            books: [],
+            // totalNumBooks: ,
+          }}
+        >
+          <BookList isLoading />,
+        </BookResultsContext.Provider>
+      </SearchTermContext.Provider>,
+    );
+    //ACT
+    const bookCardShells = screen.getAllByTestId("book-card-shell");
+    //ASSERT
+    expect(bookCardShells).toHaveLength(10);
+  });
+
+  it("Shouldn't render search term results message when isLoading", () => {
+    //ARRANGE
+    render(
+      <SearchTermContext.Provider value={{ searchTerm: "test searchterm" }}>
+        <BookResultsContext.Provider
+          value={{
+            books: [],
+            // totalNumBooks: ,
+          }}
+        >
+          <BookList isLoading />,
+        </BookResultsContext.Provider>
+      </SearchTermContext.Provider>,
+    );
+    //ACT
+    const bookCardShells = screen.getAllByTestId("book-card-shell");
+    const searchResultsHeader = screen.queryByRole("heading", { level: 2 });
+    //ASSERT
+    expect(bookCardShells).toHaveLength(10);
+    expect(searchResultsHeader).not.toBeInTheDocument();
   });
 });

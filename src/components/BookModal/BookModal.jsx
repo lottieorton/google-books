@@ -21,7 +21,7 @@ export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
-      data-testId="outerSection"
+      data-testid="outerSection"
     >
       <article className={classes.modalContainer}>
         <section
@@ -45,7 +45,11 @@ export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
           <div className={classes.headerInfo}>
             <h4 className={classes.title}>{title}</h4>
             <p className={classes.author}>{authors?.join(", ")}</p>
-            <button className={classes.close} onClick={onClose}>
+            <button
+              className={classes.close}
+              onClick={onClose}
+              aria-label="book"
+            >
               <i className={classes.closeIcon + " fa-solid fa-xmark"}></i>
             </button>
           </div>

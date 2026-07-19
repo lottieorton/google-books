@@ -5,13 +5,22 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-top: 2em;
   gap: 2em;
+  padding: 1.25em;
   &_loading {
-    padding-top: 8em;
+    padding-top: 3em;
+  }
+  @include tablet {
+    padding: 2em;
+    &_loading {
+      padding-top: 5em;
+    }
   }
   @include large-desktop {
     padding: 3em;
+    &_loading {
+      padding-top: 8em;
+    }
   }
 }
 
@@ -37,7 +46,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 300px));
   width: 100%;
   grid-gap: 1.5em;
   justify-content: center;
