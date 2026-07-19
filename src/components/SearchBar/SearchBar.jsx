@@ -28,7 +28,10 @@ export default function SearchBar() {
         <h2 className={classes.heading}>bookfinder</h2>
       </div>
       <form className={classes.form} onSubmit={handleSubmit}>
-        <i className={classes.icon + " fa-solid fa-magnifying-glass"}></i>
+        <i
+          className={classes.icon + " fa-solid fa-magnifying-glass"}
+          aria-hidden="true"
+        ></i>
         <input
           className={classes.input}
           type="text"

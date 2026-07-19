@@ -31,7 +31,9 @@ export default function BookCard({ book, index }) {
           )}
         </div>
         <div className={classes.details}>
-          <p className={classes.category}>{categories?.join(", ")}</p>
+          {categories && (
+            <p className={classes.category}>{categories?.join(", ")}</p>
+          )}
           <h4 className={classes.title}>{title}</h4>
           <p className={classes.author}>{authors?.join(", ")}</p>
           <p className={classes.description}>{description}</p>

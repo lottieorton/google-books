@@ -65,10 +65,10 @@ describe("BookCard", () => {
     // ASSERT
     expect(defaultImageElement).toBeInTheDocument();
     expect(title).toHaveTextContent("");
-    // checking category, author and description elements
+    // checking author and description elements
+    expect(textElements).toHaveLength(2);
     expect(textElements[0]).toHaveTextContent("");
     expect(textElements[1]).toHaveTextContent("");
-    expect(textElements[2]).toHaveTextContent("");
   });
 
   it("Should pass correct props to BookModal", () => {
