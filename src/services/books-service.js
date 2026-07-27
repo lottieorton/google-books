@@ -13,5 +13,29 @@ export const getBooksBySearchTerm = async (term, start = 0) => {
   if (data.totalItems === 0 || !data.items) {
     throw new Error("No books found");
   }
-  return data;
+  return sanitizeBookData(data);
+};
+
+const sanitizeBookData = (booksData) => {
+  const cleanedBooks = booksData.items.map((book) => {
+    return {
+      id: book.id,
+      title: book.volumeInfo.title,
+      authors: book.volumeInfo.authors?.join(", "),
+      categories: book.volumeInfo.categories?.join(", "),
+      description: book.volumeInfo.description,
+      image: book.volumeInfo.imageLinks?.thumbnail,
+      averageRating: book.volumeInfo.averageRating,
+      ratingsCount: book.volumeInfo.ratingsCount,
+      pageCount: book.volumeInfo.pageCount,
+      publishedYear: book.volumeInfo.publishedDate?.slice(0, 4),
+      publisher: book.volumeInfo.publisher,
+      language: book.volumeInfo.language?.toUpperCase(),
+    };
+  });
+
+  return {
+    totalNumBooks: booksData.totalItems,
+    books: cleanedBooks,
+  };
 };

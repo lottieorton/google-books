@@ -17,21 +17,15 @@ describe("BookList", () => {
   const books = [
     {
       id: 0,
-      volumeInfo: {
-        title: "Test Book1",
-      },
+      title: "Test Book1",
     },
     {
       id: 1,
-      volumeInfo: {
-        title: "Test Book2",
-      },
+      title: "Test Book2",
     },
     {
       id: 2,
-      volumeInfo: {
-        title: "Test Book3",
-      },
+      title: "Test Book3",
     },
   ];
 

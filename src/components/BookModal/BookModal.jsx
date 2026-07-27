@@ -7,11 +7,11 @@ export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
     authors,
     categories,
     description,
-    imageLinks,
+    image,
     averageRating,
     ratingsCount,
     pageCount,
-    publishedDate,
+    publishedYear,
     publisher,
     language,
   } = book;
@@ -31,12 +31,8 @@ export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
             classes[`modalHeader_bgColor_${bgColorNum}`]
           }
         >
-          {imageLinks?.thumbnail ? (
-            <img
-              className={classes.img}
-              src={imageLinks.thumbnail}
-              alt={title}
-            />
+          {image ? (
+            <img className={classes.img} src={image} alt={title} />
           ) : (
             <span className={classes.noImgIcon + " material-symbols-outlined"}>
               import_contacts
@@ -44,11 +40,11 @@ export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
           )}
           <div className={classes.headerInfo}>
             <h4 className={classes.title}>{title}</h4>
-            <p className={classes.author}>{authors?.join(", ")}</p>
+            <p className={classes.author}>{authors}</p>
             <button
               className={classes.close}
               onClick={onClose}
-              aria-label="book"
+              aria-label="close modal"
             >
               <i className={classes.closeIcon + " fa-solid fa-xmark"}></i>
             </button>
@@ -77,9 +73,7 @@ export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
             </div>
             <div className={classes.infoSegment}>
               <p className={classes.infoTitle}>PUBLISHED</p>
-              <p className={classes.infoText}>
-                {publishedDate?.slice(0, 4) ?? "-"}
-              </p>
+              <p className={classes.infoText}>{publishedYear ?? "-"}</p>
             </div>
             <div className={classes.infoSegment}>
               <p className={classes.infoTitle}>PUBLISHER</p>
@@ -87,9 +81,7 @@ export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
             </div>
             <div className={classes.infoSegment}>
               <p className={classes.infoTitle}>LANGUAGE</p>
-              <p className={classes.infoText}>
-                {language?.toUpperCase() ?? "-"}
-              </p>
+              <p className={classes.infoText}>{language ?? "-"}</p>
             </div>
           </div>
           {description && (

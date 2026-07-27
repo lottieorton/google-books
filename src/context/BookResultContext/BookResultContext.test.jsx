@@ -13,16 +13,16 @@ vi.mock("../../services/books-service", () => ({
 }));
 
 const mockBooksData = {
-  totalItems: 10,
-  items: [
+  totalNumBooks: 10,
+  books: [
     { id: 1, name: "book1" },
     { id: 2, name: "book2" },
   ],
 };
 
 const mockEmptyData = {
-  totalItems: 0,
-  items: [],
+  totalNumBooks: 0,
+  books: [],
 };
 
 const MockChild = () => {

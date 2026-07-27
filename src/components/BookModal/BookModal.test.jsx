@@ -14,16 +14,16 @@ describe("BookModal", () => {
 
   const book = {
     title: "Test Title",
-    authors: ["Test Author 1", "Test Author 2"],
-    categories: ["Test Cat 1", "Test Cat 2"],
+    authors: "Test Author 1, Test Author 2",
+    categories: "Test Cat 1, Test Cat 2",
     description: "A test description",
-    imageLinks: { thumbnail: "https://example.com/book.png" },
+    image: "https://example.com/book.png",
     averageRating: 4.5,
     ratingsCount: 12,
     pageCount: 350,
-    publishedDate: "2026-07-01",
+    publishedYear: "2026",
     publisher: "Test Publisher",
-    language: "en",
+    language: "EN",
   };
   it("Should render with book data", () => {
     //ARRANGE

@@ -9,7 +9,7 @@ export default function BookList() {
   const { books = [], totalNumBooks } = useBookResults();
 
   const listBooks = books.map((book, index) => {
-    return <BookCard key={book.id} book={book.volumeInfo} index={index} />;
+    return <BookCard key={book.id} book={book} index={index} />;
   });
 
   return (

@@ -20,20 +20,16 @@ vi.mock("../BookModal/BookModal", () => {
 
 describe("BookCard", () => {
   const book = {
-    volumeInfo: {
-      title: "Test Book",
-      authors: ["Test Author", "Test Author 2"],
-      categories: ["Test Category", "Test Category 2"],
-      description: "This is a test description",
-      imageLinks: {
-        thumbnail: "https://example.com/test-image.jpg",
-      },
-    },
+    title: "Test Book",
+    authors: "Test Author, Test Author 2",
+    categories: "Test Category, Test Category 2",
+    description: "This is a test description",
+    image: "https://example.com/test-image.jpg",
   };
 
   it("Should render component with book info", () => {
     //ARRANGE
-    render(<BookCard key="123" book={book.volumeInfo} index={1} />);
+    render(<BookCard key="123" book={book} index={1} />);
     // ACT
     const imageElement = screen.getByRole("img", { name: "Test Book" });
     const categories = screen.getByText("Test Category, Test Category 2");
@@ -73,11 +69,11 @@ describe("BookCard", () => {
 
   it("Should pass correct props to BookModal", () => {
     //ARRANGE
-    render(<BookCard key="123" book={book.volumeInfo} index={1} />);
+    render(<BookCard key="123" book={book} index={1} />);
     // ASSERT
     expect(mockBookModalSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        book: book.volumeInfo,
+        book: book,
         isOpen: false,
         bgColorNum: 1,
         onClose: expect.any(Function),
@@ -87,7 +83,7 @@ describe("BookCard", () => {
 
   it("Should have BookModal not open on initial load", () => {
     //ARRANGE
-    render(<BookCard key="123" book={book.volumeInfo} index={1} />);
+    render(<BookCard key="123" book={book} index={1} />);
     // ACT
     const bookModalNotRendered = screen.getByTestId("book-modal-not-rendered");
     // ASSERT
@@ -97,7 +93,7 @@ describe("BookCard", () => {
   it("Should open the BookModal when the card is clicked", async () => {
     //ARRANGE
     const user = userEvent.setup();
-    render(<BookCard key="123" book={book.volumeInfo} index={1} />);
+    render(<BookCard key="123" book={book} index={1} />);
     //ACT
     const bookCard = screen.getByRole("article");
     expect(screen.getByTestId("book-modal-not-rendered")).toBeInTheDocument();
@@ -109,7 +105,7 @@ describe("BookCard", () => {
   it("Should close the BookModal when the modal calls onClose passed into it", async () => {
     //ARRANGE
     const user = userEvent.setup();
-    render(<BookCard key="123" book={book.volumeInfo} index={1} />);
+    render(<BookCard key="123" book={book} index={1} />);
     //ACT
     const bookCard = screen.getByRole("article");
     await user.click(bookCard);
