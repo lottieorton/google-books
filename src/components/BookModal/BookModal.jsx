@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
 import classes from "./BookModal.module.scss";
 
-export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
+export default function BookModal({ book, onClose, bgColorNum }) {
   const {
     title,
     authors,
@@ -17,7 +17,7 @@ export default function BookModal({ book, isOpen, onClose, bgColorNum }) {
   } = book;
   return createPortal(
     <div
-      className={`${classes.modal} ${isOpen ? classes.modal_open : ""}`}
+      className={`${classes.modal}`}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

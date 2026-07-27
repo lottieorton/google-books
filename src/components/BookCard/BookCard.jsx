@@ -2,15 +2,12 @@ import { useState } from "react";
 import classes from "./BookCard.module.scss";
 import BookModal from "../BookModal/BookModal";
 
-export default function BookCard({ book, index }) {
-  const { title, authors, categories, description, image } = book;
-  const [isOpen, setIsOpen] = useState(false);
-
-  const bgColorNum = index % 4;
+export default function BookCard({ book, index, selectBook, bgColorNum }) {
+  const { id, title, authors, categories, description, image } = book;
 
   return (
     <>
-      <article className={classes.card} onClick={() => setIsOpen(true)}>
+      <article className={classes.card} onClick={() => selectBook(id)}>
         <div
           className={
             classes.imgContainer +
@@ -33,12 +30,6 @@ export default function BookCard({ book, index }) {
           <p className={classes.description}>{description}</p>
         </div>
       </article>
-      <BookModal
-        book={book}
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        bgColorNum={bgColorNum}
-      />
     </>
   );
 }
