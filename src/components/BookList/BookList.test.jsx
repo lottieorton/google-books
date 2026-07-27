@@ -13,14 +13,6 @@ vi.mock("../BookCard/BookCard", () => {
   };
 });
 
-vi.mock("../BookCard/BookCardShell", () => {
-  return {
-    default: function MockBookCardShell(props) {
-      return <p data-testid="book-card-shell">{props.key}</p>;
-    },
-  };
-});
-
 describe("BookList", () => {
   const books = [
     {
@@ -94,47 +86,5 @@ describe("BookList", () => {
     //ASSERT
     expect(grid).toBeInTheDocument();
     expect(grid).toBeEmptyDOMElement();
-  });
-
-  it("Should render 10 empty containers when isLoading", () => {
-    //ARRANGE
-    render(
-      <SearchTermContext.Provider value={{ searchTerm: "test searchterm" }}>
-        <BookResultsContext.Provider
-          value={{
-            books: [],
-            // totalNumBooks: ,
-          }}
-        >
-          <BookList isLoading />,
-        </BookResultsContext.Provider>
-      </SearchTermContext.Provider>,
-    );
-    //ACT
-    const bookCardShells = screen.getAllByTestId("book-card-shell");
-    //ASSERT
-    expect(bookCardShells).toHaveLength(10);
-  });
-
-  it("Shouldn't render search term results message when isLoading", () => {
-    //ARRANGE
-    render(
-      <SearchTermContext.Provider value={{ searchTerm: "test searchterm" }}>
-        <BookResultsContext.Provider
-          value={{
-            books: [],
-            // totalNumBooks: ,
-          }}
-        >
-          <BookList isLoading />,
-        </BookResultsContext.Provider>
-      </SearchTermContext.Provider>,
-    );
-    //ACT
-    const bookCardShells = screen.getAllByTestId("book-card-shell");
-    const searchResultsHeader = screen.queryByRole("heading", { level: 2 });
-    //ASSERT
-    expect(bookCardShells).toHaveLength(10);
-    expect(searchResultsHeader).not.toBeInTheDocument();
   });
 });
