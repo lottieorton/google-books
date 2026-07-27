@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import BooksContainer from "./BooksContainer";
 //import mocked components
 import { BookResultsContext } from "../../context/BookResultContext/BookResultContext";
+import { FetchBookError, NoBookError } from "../../errors/errors";
 
 //mocking Components and services
 vi.mock("../../components/Header/Header", () => {
@@ -105,7 +106,7 @@ describe("BooksContainer", () => {
       <BookResultsContext.Provider
         value={{
           status: "error",
-          error: "No books found",
+          error: new NoBookError(),
         }}
       >
         <BooksContainer />

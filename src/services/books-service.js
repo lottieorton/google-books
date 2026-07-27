@@ -1,17 +1,19 @@
+import { FetchBookError, NoBookError, RequestError } from "../errors/errors";
+
 const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 
 export const getBooksBySearchTerm = async (term, start = 0) => {
-  if (term.trim() === "") throw new Error("No books found");
-  if (isNaN(start)) throw new Error("Start number has to be a number");
+  if (term.trim() === "") throw new NoBookError("No books found");
+  if (isNaN(start)) throw new RequestError("Start number has to be a number");
   const response = await fetch(
     `https://www.googleapis.com/books/v1/volumes?q=${term}&startIndex=${start}&maxResults=20&key=${apiKey}`,
   );
   if (!response.ok) {
-    throw new Error("Failed to fetch books");
+    throw new FetchBookError("Failed to fetch books");
   }
   const data = await response.json();
   if (data.totalItems === 0 || !data.items) {
-    throw new Error("No books found");
+    throw new NoBookError(`No books found for ${term}`);
   }
   return sanitizeBookData(data);
 };

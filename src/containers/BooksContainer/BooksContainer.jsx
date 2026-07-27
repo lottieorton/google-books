@@ -6,6 +6,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import Header from "../../components/Header/Header";
 import { useBookResults } from "../../context/BookResultContext/BookResultContext";
 import BookListShell from "../../components/BookList/BookListShell";
+import { NoBookError } from "../../errors/errors";
 
 export default function BooksContainer() {
   const { status, error } = useBookResults();
@@ -15,7 +16,7 @@ export default function BooksContainer() {
   if (status === "loading") return <BookListShell />;
 
   if (status === "error") {
-    if (error === "No books found") return <NoBooksView />;
+    if (error instanceof NoBookError) return <NoBooksView />;
     return <FetchErrorView />;
   }
 

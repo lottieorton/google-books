@@ -35,7 +35,7 @@ const BookResultsProvider = ({ children }) => {
       })
       .catch((err) => {
         setStatus("error");
-        setError(err.message);
+        setError(err);
         console.error(err);
       });
   }, [searchTerm, effectivePage]);
