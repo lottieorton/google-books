@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import BooksContainer from "./BooksContainer";
 //import mocked components
 import { BookResultsContext } from "../../context/BookResultContext/BookResultContext";
+import { FetchBookError, NoBookError } from "../../errors/errors";
 
 //mocking Components and services
 vi.mock("../../components/Header/Header", () => {
@@ -27,12 +28,17 @@ vi.mock("../../components/ResultsIssues/NoBooksView", () => {
     },
   };
 });
-const mockBookListSpy = vi.fn();
 vi.mock("../../components/BookList/BookList", () => {
   return {
-    default: function MockBookList(props) {
-      mockBookListSpy(props);
-      return <div data-testid={`book-list-isLoading-${props.isLoading}`} />;
+    default: function MockBookList() {
+      return <div data-testid={`book-list`} />;
+    },
+  };
+});
+vi.mock("../../components/BookList/BookListShell", () => {
+  return {
+    default: function MockBookListShell() {
+      return <div data-testid={`book-list-shell`} />;
     },
   };
 });
@@ -79,7 +85,7 @@ describe("BooksContainer", () => {
     expect(screen.getByTestId("header")).toBeInTheDocument();
   });
 
-  it("Should render the BookList component when status is loading", () => {
+  it("Should render the BookListShell component when status is loading", () => {
     //ARRANGE
     render(
       <BookResultsContext.Provider
@@ -91,7 +97,7 @@ describe("BooksContainer", () => {
       </BookResultsContext.Provider>,
     );
     //ASSERT
-    expect(screen.getByTestId("book-list-isLoading-true")).toBeInTheDocument();
+    expect(screen.getByTestId("book-list-shell")).toBeInTheDocument();
   });
 
   it("Should render the NoBooks view if status is error with error message 'No Books Found'", () => {
@@ -100,7 +106,7 @@ describe("BooksContainer", () => {
       <BookResultsContext.Provider
         value={{
           status: "error",
-          error: "No books found",
+          error: new NoBookError(),
         }}
       >
         <BooksContainer />
@@ -138,9 +144,7 @@ describe("BooksContainer", () => {
       </BookResultsContext.Provider>,
     );
     //ACT
-    expect(
-      screen.getByTestId("book-list-isLoading-undefined"),
-    ).toBeInTheDocument();
+    expect(screen.getByTestId("book-list")).toBeInTheDocument();
     expect(screen.getByTestId("pagination")).toBeInTheDocument();
   });
 });

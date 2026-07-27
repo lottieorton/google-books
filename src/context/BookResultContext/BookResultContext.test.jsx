@@ -6,6 +6,7 @@ import { userEvent } from "@testing-library/user-event";
 import { getBooksBySearchTerm } from "../../services/books-service";
 import BookResultsProvider, { useBookResults } from "./BookResultContext";
 import { SearchTermContext } from "../SearchTermContext/SearchTermContext";
+import { NoBookError } from "../../errors/errors";
 
 //mocking Components and services
 vi.mock("../../services/books-service", () => ({
@@ -13,16 +14,16 @@ vi.mock("../../services/books-service", () => ({
 }));
 
 const mockBooksData = {
-  totalItems: 10,
-  items: [
+  totalNumBooks: 10,
+  books: [
     { id: 1, name: "book1" },
     { id: 2, name: "book2" },
   ],
 };
 
 const mockEmptyData = {
-  totalItems: 0,
-  items: [],
+  totalNumBooks: 0,
+  books: [],
 };
 
 const MockChild = () => {
@@ -32,7 +33,7 @@ const MockChild = () => {
   return (
     <div>
       <div data-testid="status">{status}</div>
-      <div data-testid="error">{error}</div>
+      <div data-testid="error">{error.message}</div>
       <div data-testid="currentPage">{currentPage}</div>
       <div data-testid="totalNumBooks">{totalNumBooks}</div>
       <div data-testid="books">
@@ -99,7 +100,7 @@ describe("BookResultContext", () => {
   it("Should have status as error and an error message if API rejects", async () => {
     //ARRANGE
     vi.mocked(getBooksBySearchTerm).mockRejectedValue(
-      new Error("No books found"),
+      new NoBookError("No books found"),
     );
     renderProvider("empty");
     //ACT

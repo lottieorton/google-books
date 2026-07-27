@@ -30,15 +30,16 @@ const BookResultsProvider = ({ children }) => {
     getBooksBySearchTerm(searchTerm, nextStartBook)
       .then((data) => {
         setStatus("success");
-        setBooks(data?.items);
-        setTotalNumBooks(data?.totalItems ?? 0);
+        setBooks(data?.books);
+        setTotalNumBooks(data?.totalNumBooks ?? 0);
       })
       .catch((err) => {
         setStatus("error");
-        setError(err.message);
+        setError(err);
         console.error(err);
       });
   }, [searchTerm, effectivePage]);
+
   return (
     <BookResultsContext.Provider
       value={{
